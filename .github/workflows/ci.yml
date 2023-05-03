@@ -10,3 +10,10 @@ jobs:
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v2
+
+        //git status
+        //git add .
+        //git status
+        //git commit -m "Break the app on purpose"
+        //git status
+        //git push origin main
