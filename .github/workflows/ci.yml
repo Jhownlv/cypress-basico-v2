@@ -2,7 +2,7 @@
 #git add .
 #git status
 #git commit -m "Break the app on purpose"
-##git status
+#git status
 #git push origin main
 
 name: End-to-end tests 🧪
