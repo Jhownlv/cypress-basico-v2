@@ -30,7 +30,7 @@ cy.visit('./src/index.html')
     cy.get('.success').should('not.be.visible')
   })
 
-  it.only('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function() {
+  it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function() {
 
     cy.clock()
 
@@ -56,6 +56,8 @@ cy.visit('./src/index.html')
 
   it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do formulário', function() {
 
+    cy.clock()
+
     cy.get('#firstName').type('Ricardo')
     cy.get('#lastName').type('Gomes')
     cy.get('#email').type('Ricardo.g@exemplo.com')
@@ -63,7 +65,11 @@ cy.visit('./src/index.html')
     cy.get('#open-text-area').type('Aprendizado Teste')
     cy.contains('button', 'Enviar').click()
 
-    cy.get('.error').should('be.visible')  
+    cy.get('.error').should('be.visible') 
+    
+    cy.tick(THREE_SECOND_IN_MS)
+
+    cy.get('.error').should('not.be.visible')
   })
 
   it('preenche e limpa os campos nome, sobrenome, email e telefone', function(){
@@ -101,16 +107,28 @@ cy.visit('./src/index.html')
   
   it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
     
+    cy.clock()
+
     cy.contains('button', 'Enviar').click()
 
     cy.get('.error').should('be.visible')
+
+    cy.tick(3000)
+
+    cy.get('.error').should('not.be.visible')
   })
 
   it('envia o formulário com sucesso usando um comando customizado', function(){
 
- cy.fillMandatoryFieldsAndSubmit()
+   cy.clock()
 
- cy.get('.success').should('be.visible')
+   cy.fillMandatoryFieldsAndSubmit()
+
+   cy.get('.success').should('be.visible')
+
+   cy.tick(THREE_SECOND_IN_MS)
+
+   cy.get('.error').should('not.be.visible')
   })
 
   it('seleciona um produto (Blog) por seu texto', function() {
