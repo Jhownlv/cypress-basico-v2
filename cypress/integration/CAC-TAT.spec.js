@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 
 describe('Central de Atendimento ao Cliente TAT', function() {
+    const THREE_SECOND_IN_MS = 3000
     beforeEach(function() {
 cy.visit('./src/index.html')
 
@@ -14,6 +15,8 @@ cy.visit('./src/index.html')
   it('Preenche os campos obrigatórios e envia o formulário', function (){
     const longText = 'Aprendizado teste, Aprendizado teste, Aprendizado teste, Aprendizado teste, Aprendizado teste, Aprendizado teste, Aprendizado teste, Aprendizado teste, Aprendizado teste, Aprendizado teste.'
     
+    cy.clock()
+
     cy.get('#firstName').type('Ricardo')
     cy.get('#lastName').type('Gomes')
     cy.get('#email').type('Ricardo.g@exemplo.com')
@@ -21,9 +24,15 @@ cy.visit('./src/index.html')
     cy.contains('button', 'Enviar').click()
 
     cy.get('.success').should('be.visible')
+
+    cy.tick(THREE_SECOND_IN_MS)
+
+    cy.get('.success').should('not.be.visible')
   })
 
-  it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function() {
+  it.only('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function() {
+
+    cy.clock()
 
     cy.get('#firstName').type('Ricardo')
     cy.get('#lastName').type('Gomes')
@@ -32,6 +41,10 @@ cy.visit('./src/index.html')
     cy.contains('button', 'Enviar').click()
 
     cy.get('.error').should('be.visible')
+
+    cy.tick(THREE_SECOND_IN_MS)
+
+    cy.get('.error').should('not.be.visible')
   })
 
   it('campo telefone continua vazio quando preenchido com valor não-numérico', function() {
