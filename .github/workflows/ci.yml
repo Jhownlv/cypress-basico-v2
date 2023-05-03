@@ -1,3 +1,10 @@
+#git status
+#git add .
+#git status
+#git commit -m "Break the app on purpose"
+##git status
+#git push origin main
+
 name: End-to-end tests 🧪
 on: [push]
 jobs:
@@ -11,9 +18,4 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
 
-        //git status
-        //git add .
-        //git status
-        //git commit -m "Break the app on purpose"
-        //git status
-        //git push origin main
+        
