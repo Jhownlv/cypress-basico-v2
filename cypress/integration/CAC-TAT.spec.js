@@ -36,7 +36,7 @@ cy.visit('./src/index.html')
 
   it('campo telefone continua vazio quando preenchido com valor não-numérico', function() {
 
-    cy.get('#phone')
+    //cy.get('#phone')
     .type('jshalstue')
     .should('have.value', '')
   })
